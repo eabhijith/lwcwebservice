@@ -1,0 +1,47 @@
+<!--
+  @File Name          : newsComponent.html
+  @Description        : 
+  @Author             : eabhijith@wefoxgroup.com
+  @Group              : 
+  @Last Modified By   : eabhijith@wefoxgroup.com
+  @Last Modified On   : 2/3/2020, 9:43:41 PM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    2/3/2020   eabhijith@wefoxgroup.com     Initial Version
+-->
+<template>
+    <lightning-card title="Yahoo News!!😀" icon-name="custom:custom34">
+
+        <template if:false={filteredNews}>
+            <p class="slds-align_absolute-center">ufff!! This is akward No News found or something went wrong. Please
+                try in a while 😅</p>
+        </template>
+
+
+        <template if:true={filteredNews}>
+            <div class="slds-m-around_medium">
+                <lightning-input type="search" onchange={handleNewsSearch} class="slds-m-bottom_small" label="Search News">
+                </lightning-input>
+            </div>
+            <template for:each={filteredNews} for:item="newsItem">
+                <!-- <c-news-item key={newsItem.key} news-item="newsItem"></c-news-item> -->
+                <a key={newsItem.key} class="session" href={newsItem.link} target="_blank">
+                    <div>
+                        <p class="title">{newsItem.title}</p>
+                        <lightning-formatted-rich-text value={newsItem.description}>
+                        </lightning-formatted-rich-text>
+                        <p class="icon room">{newsItem.dateandTime}</p>
+                    </div>
+                </a>
+            </template>
+
+            <template if:true={noNewsFound}>
+                <p class="slds-align_absolute-center">NO News Found Please try a differnt search 😊</p>
+            </template>
+        </template>
+
+        <div slot="footer">
+            Click on the News Item to View More details...
+        </div>
+    </lightning-card>
+</template>
